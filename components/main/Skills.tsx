@@ -12,12 +12,13 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="flex flex-col items-center bg-[#52616B] justify-center w-full h-auto relative overflow-hidden my-5 py-20"
+      className="flex flex-col items-center bg-[#52616B] justify-center w-full h-auto relative overflow-hidden my-5 py-20 px-5 sm:px-10"
       style={{ transform: "scale(1)" }}
     >
       <SkillText />
 
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+      {/* Game Development Skills */}
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-4 sm:gap-5 items-center">
         {GameDevelopment_Skill.map((image, index) => (
           <SkillDataProvider
             key={index}
@@ -29,7 +30,8 @@ const Skills = () => {
         ))}
       </div>
 
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+      {/* General Skill Data */}
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-4 sm:gap-5 items-center">
         {Skill_data.map((image, index) => (
           <SkillDataProvider
             key={index}
@@ -41,7 +43,8 @@ const Skills = () => {
         ))}
       </div>
 
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+      {/* Backend Skills */}
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-4 sm:gap-5 items-center">
         {Backend_skill.map((image, index) => (
           <SkillDataProvider
             key={index}
@@ -53,7 +56,8 @@ const Skills = () => {
         ))}
       </div>
 
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+      {/* Other Skills */}
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-4 sm:gap-5 items-center">
         {Other_skill.map((image, index) => (
           <SkillDataProvider
             key={index}
@@ -65,7 +69,9 @@ const Skills = () => {
         ))}
       </div>
 
-      {/* <div className="w-full h-full relative">
+      {/* Optional Video Background */}
+      {/* 
+      <div className="w-full h-full relative">
         <div className="w-full h-full z-[-10] opacity-30 absolute flex items-center justify-center bg-hover object">
           <video
             className="w-full h-auto"
@@ -77,7 +83,8 @@ const Skills = () => {
             src="/code-bottom.webm"
           />
         </div>
-      </div> */}
+      </div> 
+      */}
     </section>
   );
 };
