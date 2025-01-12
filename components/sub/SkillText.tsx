@@ -10,14 +10,14 @@ const SkillText = () => {
     <div className="w-full h-full flex flex-col items-center justify-center">
       <motion.div
       variants={slideInFromLeft(0.5)}
-      className="text-[30px] text-[#C9D6DF] font-medium mt-[10px] text-center mb-[10px]"
+      className="text-[30px] text-[#F0F5F9] font-medium mt-[10px] text-center mb-[10px]"
       >
         Using mordern skills to build stuff
       </motion.div>
 
       <motion.div
       variants={slideInFromRight(0.5)}
-      className="cursive text-[20px] text-[#C9D6DF] mb-5 mt-[10px] text-center"
+      className="cursive text-[20px] text-[#F0F5F9] mb-5 mt-[10px] text-center"
       >
         Never back down from a challenge
       </motion.div>

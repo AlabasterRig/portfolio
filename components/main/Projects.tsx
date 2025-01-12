@@ -4,7 +4,7 @@ import ProjectCard from "../sub/ProjectCard";
 const Projects = () => {
   return (
     <section id="projects">
-      <div className="flex flex-col items-center justify-center py-20">
+      <div className="flex flex-col items-center justify-center py-20 my-5">
         <h1 className="relative text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#1E2022] to-[#52616B] pb-20">
           My Projects
         </h1>
