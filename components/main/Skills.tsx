@@ -12,8 +12,8 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="flex flex-col items-center justify-center gap-3 h-full relative overflow-hidden py-20"
-      style={{ transform: "scale(0.9)" }}
+      className="flex flex-col items-center bg-[#52616B] justify-center w-full h-auto relative overflow-hidden py-20"
+      style={{ transform: "scale(1)" }}
     >
       <SkillText />
 
@@ -65,8 +65,8 @@ const Skills = () => {
         ))}
       </div>
 
-      <div className="w-full h-full absolute">
-        <div className="w-full h-full z-[-10] opacity-30 relative flex items-center justify-center bg-hover object">
+      {/* <div className="w-full h-full relative">
+        <div className="w-full h-full z-[-10] opacity-30 absolute flex items-center justify-center bg-hover object">
           <video
             className="w-full h-auto"
             preload="false"
@@ -77,7 +77,7 @@ const Skills = () => {
             src="/code-bottom.webm"
           />
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
