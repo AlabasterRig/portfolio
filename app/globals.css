@@ -45,11 +45,13 @@
   padding: 0.75rem 1.5rem; /* Increased padding for better clickability */
   font-size: 1rem; /* Ensure button text is legible */
   border-radius: 8px; /* Rounded corners for better appearance */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .button-primary:hover {
   background-color: #52616B;
   box-shadow: inset 5px 0 30px #bf97ff70;
+  transform: scale(1.05); /* Slight scale-up for hover */
 }
 
 .scrollbar-hidden {
@@ -92,3 +94,10 @@ html {
     font-size: 0.8rem; /* Smaller font size for tiny screens */
   }
 }
+
+/* Accessibility: Focus Styles */
+.button-primary:focus {
+  outline: 2px solid #a48fff;
+  outline-offset: 2px;
+}
+

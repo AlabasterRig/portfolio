@@ -1,5 +1,5 @@
-import React from "react";
-import ProjectCard from "../sub/ProjectCard";
+import React from 'react';
+import ProjectCard from '../sub/ProjectCard';
 
 const Projects = () => {
   return (
@@ -15,19 +15,19 @@ const Projects = () => {
           <ProjectCard
             src="/Pic1.jpg"
             title="Fall Guy Survival"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi."
+            description="A thrilling multiplayer game where players compete in various obstacle courses."
           />
 
           <ProjectCard
             src="/Pic2.jpg"
             title="3D Engine"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi."
+            description="A custom-built 3D engine with real-time rendering and physics simulations."
           />
 
           <ProjectCard
             src="/Pic3.jpg"
             title="Dungeon Traveller"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi."
+            description="An adventure game where players explore dungeons and solve puzzles."
           />
         </div>
       </div>
