@@ -3,21 +3,20 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { slideInFromTop, slideInFromLeft, slideInFromRight } from "@/utils/motion";
-import { SparklesIcon } from "@heroicons/react/24/solid";
 
 const SkillText = () => {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center px-5">
+    <div className="w-full h-full flex flex-col items-center justify-center px-[1.25rem] sm:px-[2rem] md:px-[3rem]">
       <motion.div
         variants={slideInFromLeft(0.5)}
-        className="text-2xl sm:text-3xl md:text-[30px] text-[#F0F5F9] font-medium mt-[10px] text-center mb-[10px]"
+        className="text-[1.5rem] sm:text-[2rem] md:text-[2.2rem] text-[#F0F5F9] font-medium mt-[1rem] mb-[1rem] text-center"
       >
         Using modern skills to build stuff
       </motion.div>
 
       <motion.div
         variants={slideInFromRight(0.5)}
-        className="cursive text-xl sm:text-2xl md:text-[20px] text-[#F0F5F9] mb-5 mt-[10px] text-center"
+        className="cursive text-[1.25rem] sm:text-[1.75rem] md:text-[2rem] text-[#F0F5F9] mb-[1.25rem] mt-[1rem] text-center"
       >
         Never back down from a challenge
       </motion.div>

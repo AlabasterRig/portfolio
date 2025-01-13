@@ -12,8 +12,8 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="flex flex-col items-center bg-[#52616B] justify-center w-full h-auto relative overflow-hidden my-5 py-20 px-5 sm:px-10"
-      style={{ transform: "scale(1)" }}
+      className="flex flex-col items-center bg-[#52616B] justify-center w-full h-full relative overflow-hidden my-5 py-10 px-0 sm:px-10"
+      style={{ backgroundColor: "#52616B" }} // Ensure background color spans the full width
     >
       <SkillText />
 

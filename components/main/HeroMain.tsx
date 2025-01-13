@@ -21,7 +21,7 @@ const Hero = () => {
         */}
 
         {/* Hero Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center px-5 sm:px-10">
+        <div className="relative z-10 flex flex-col items-center justify-center py-[5rem] px-[1.25rem] sm:px-[2.5rem] md:px-[2rem]">
           <HeroContent />
         </div>
       </div>
