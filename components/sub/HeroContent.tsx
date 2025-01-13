@@ -16,11 +16,11 @@ const HeroContent = () => {
       <div className="h-full w-full flex flex-col gap-[1.25rem] justify-center m-auto text-start items-center md:items-start">
         <motion.div
           variants={slideInFromLeft(0.5)}
-          className="flex flex-col gap-1 mt-3 text-[2rem] sm:text-[2.5rem] md:text-[3.75rem] font-bold text-[#1E2022] max-w-[37.5rem] w-auto h-auto text-center md:text-left"
+          className="flex flex-col gap-1 mt-3 text-[2rem] sm:text-[2.5rem] md:text-[3.75rem] font-bold text-[var(--text-primary)] max-w-[37.5rem] w-auto h-auto text-center md:text-left transition-colors duration-300"
         >
           <span>
             Creating with
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52616B] to-[#1E2022]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--text-hero-magic-start)] to-[var(--text-hero-magic-end)] transition-colors duration-300">
               {" "}
               magic{" "}
             </span>
@@ -29,7 +29,7 @@ const HeroContent = () => {
 
         <motion.p
           variants={slideInFromLeft(0.8)}
-          className="text-[1rem] sm:text-[1.125rem] md:text-[1.25rem] text-[#1E2022] my-[1.25rem] max-w-[37.5rem] text-center md:text-left"
+          className="text-[1rem] sm:text-[1.125rem] md:text-[1.25rem] text-[var(--text-primary)] my-[1.25rem] max-w-[37.5rem] text-center md:text-left transition-colors duration-300"
         >
           I&apos;m a game developer who is passionate about creating games and
           interactive experiences that are fun, engaging, and memorable. I have
@@ -40,7 +40,7 @@ const HeroContent = () => {
         <motion.a
           variants={slideInFromLeft(1)}
           href="mailto:contact@utkri.st"
-          className="py-[0.625rem] px-[1.25rem] button-primary text-center text-[#1E2022] cursor-pointer rounded-lg max-w-[12.5rem] mt-[1.25rem]"
+          className="py-[0.625rem] px-[1.25rem] button-primary text-center text-white cursor-pointer rounded-lg max-w-[12.5rem] mt-[1.25rem]"
         >
           Contact Me!
         </motion.a>

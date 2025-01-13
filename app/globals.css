@@ -6,18 +6,43 @@
 :root {
   /* Light Theme (Default) */
   --background: #ffffff;
+  --navbar-bg: #040D12;
+  --skill-background: #040D12;
+  --footer-background: #040D12;
+  --navbar-shadow-bg: #e2e8f0;
+  --navbar-button-bg: #ffffff;
   --text-primary: #333333;
-  --button-bg: #1E2022;
-  --button-hover: #52616B;
+  --text-hero-magic-start: #1E2022;
+  --text-hero-magic-end: #52616B;
+  --text-navbar-main: #F0F5F9;
+  --text-contact: #F0F5F9;
+  --text-skill: #F0F5F9;
+  --text-project: #F0F5F9;
+  --text-footer: #F0F5F9;
+  --button-bg: #1C2B2D;
+  --button-hover: #4d768c;
   --box-shadow: #bf97ff70;
+  --border-bg: #e2e8f0;
 }
 
 [data-theme='dark'] {
-  --background: #1a1a1a;
-  --text-primary: #ffffff;
-  --button-bg: #52616B;
-  --button-hover: #1E2022;
-  --box-shadow: #6b4da670;
+  --background: #040D12;
+  --navbar-bg: #14274E;
+  --skill-background: #040D12;
+  --navbar-shadow-bg: #31112C;
+  --navbar-button-bg: #31112C;
+  --text-primary: #F0F5F9;
+  --text-hero-magic-start: #87431D;
+  --text-hero-magic-end: #0F3460;
+  --text-navbar-main: #F0F5F9;
+  --text-contact: #F0F5F9;
+  --text-skill: #F0F5F9;
+  --text-project: #F0F5F9;
+  --text-footer: #F0F5F9;
+  --button-bg: #323232;
+  --button-hover: #0D7377;
+  --box-shadow: #1C2B2D;
+  --border-bg: #1C2B2D;
 }
 
 .cursive {
@@ -26,17 +51,12 @@
 
 .Welcome-text {
   background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.4),
-      rgba(255, 255, 255, 0.4)
-    ),
-    linear-gradient(90.01deg, #e59cff 0.01%, #ba9cff 50.01%, #9cb2ff 100%);
-  background-blend-mode: normal, screen;
+    0deg,
+    var(--text-hero-magic-start) 0%,
+    var(--text-hero-magic-end) 100%
+  );
   -webkit-background-clip: text;
-  background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* Add padding for better text spacing on small screens */
-  padding: 0 1rem;
 }
 
 .Welcome-box {
@@ -64,7 +84,7 @@ body {
 
 .button-primary {
   background-color: var(--button-bg);
-  color: var(--text-primary);
+  color: var(--text-contact);
   box-shadow: inset 0 0 12px #bf97ff3d;
   padding: 0.75rem 1.5rem; /* Increased padding for better clickability */
   font-size: 1rem; /* Ensure button text is legible */

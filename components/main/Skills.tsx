@@ -12,8 +12,7 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="flex flex-col items-center bg-[#52616B] justify-center w-full h-full relative overflow-hidden my-5 py-10 px-0 sm:px-10"
-      style={{ backgroundColor: "#52616B" }} // Ensure background color spans the full width
+      className="flex flex-col items-center bg-[var(--skill-background)] justify-center w-full h-full relative overflow-hidden my-5 py-10 px-0 sm:px-10 transition-colors duration-300"
     >
       <SkillText />
 
@@ -68,23 +67,6 @@ const Skills = () => {
           />
         ))}
       </div>
-
-      {/* Optional Video Background */}
-      {/* 
-      <div className="w-full h-full relative">
-        <div className="w-full h-full z-[-10] opacity-30 absolute flex items-center justify-center bg-hover object">
-          <video
-            className="w-full h-auto"
-            preload="false"
-            playsInline
-            loop
-            muted
-            autoPlay
-            src="/code-bottom.webm"
-          />
-        </div>
-      </div> 
-      */}
     </section>
   );
 };

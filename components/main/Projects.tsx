@@ -3,10 +3,10 @@ import ProjectCard from '../sub/ProjectCard';
 
 const Projects = () => {
   return (
-    <section id="projects" className="w-full py-10 sm:py-20 my-5 px-5 sm:px-10">
+    <section id="projects" className="w-full py-10 sm:py-20 my-5 px-5 sm:px-10 bg-[var(--background)] transition-colors duration-300">
       <div className="flex flex-col items-center justify-center w-full">
         {/* Section Header */}
-        <h1 className="relative text-2xl sm:text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#1E2022] to-[#52616B] pb-10">
+        <h1 className="relative text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] pb-10 transition-colors duration-300">
           My Projects
         </h1>
 

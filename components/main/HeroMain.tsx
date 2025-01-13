@@ -3,10 +3,10 @@ import HeroContent from "../sub/HeroContent";
 
 const Hero = () => {
   return (
-    <section id="about-me" className="relative w-full min-h-screen">
-      <div className="flex flex-col min-h-screen w-full">
+    <section id="about-me" className="w-full min-h-screen overflow-hidden">
+      <div className="relative w-full min-h-screen flex flex-col">
         {/* Background Layer */}
-        <div className="fixed top-0 left-0 z-0 w-full h-full bg-[#F0F5F9]"></div>
+        <div className="fixed inset-0 z-[-1] bg-[var(--background)] transition-colors duration-300"></div>
 
         {/* Optional Video Background */}
         {/* 
@@ -14,14 +14,14 @@ const Hero = () => {
           autoPlay
           loop
           muted
-          className="fixed top-0 left-0 z-0 w-full h-full object-cover"
+          className="fixed inset-0 z-[-1] object-cover"
         >
           <source src="/code.webm" type="video/webm" />
         </video> 
         */}
 
         {/* Hero Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center py-[5rem] px-[1.25rem] sm:px-[2.5rem] md:px-[2rem]">
+        <div className="flex-1 flex flex-col items-center justify-center p-5 sm:p-10 text-[var(--text-primary)]">
           <HeroContent />
         </div>
       </div>
