@@ -3,6 +3,23 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Light Theme (Default) */
+  --background: #ffffff;
+  --text-primary: #333333;
+  --button-bg: #1E2022;
+  --button-hover: #52616B;
+  --box-shadow: #bf97ff70;
+}
+
+[data-theme='dark'] {
+  --background: #1a1a1a;
+  --text-primary: #ffffff;
+  --button-bg: #52616B;
+  --button-hover: #1E2022;
+  --box-shadow: #6b4da670;
+}
+
 .cursive {
   font-family: "Cedarville Cursive", cursive;
 }
@@ -39,8 +56,15 @@
   max-width: 100%; /* Ensure it doesn’t overflow */
 }
 
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .button-primary {
-  background-color: #C9D6DF;
+  background-color: var(--button-bg);
+  color: var(--text-primary);
   box-shadow: inset 0 0 12px #bf97ff3d;
   padding: 0.75rem 1.5rem; /* Increased padding for better clickability */
   font-size: 1rem; /* Ensure button text is legible */
@@ -49,8 +73,8 @@
 }
 
 .button-primary:hover {
-  background-color: #52616B;
-  box-shadow: inset 5px 0 30px #bf97ff70;
+  background-color: var(--button-hover);
+  box-shadow: inset 5px 0 30px var(--box-shadow);
   transform: scale(1.05); /* Slight scale-up for hover */
 }
 
@@ -100,4 +124,3 @@ html {
   outline: 2px solid #a48fff;
   outline-offset: 2px;
 }
-

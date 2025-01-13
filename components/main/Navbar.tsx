@@ -1,8 +1,11 @@
 import Image from "next/image";
 import React from "react";
 import { Socials } from "@/constants";
+import { useTheme } from "@/context/ThemeContext";
 
 const Navbar = () => {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <div className="w-full h-[4.063rem] fixed top-0 shadow-md shadow-[#1E2022] bg-[#1E2022] backdrop-blur-lg z-50 px-5 sm:px-10">
       <div className="w-full h-full flex flex-row items-center justify-between m-auto px-[0.625rem]">
@@ -36,23 +39,34 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="flex flex-row gap-3 sm:gap-5">
-          {Socials.map((social) => (
-            <a
-              href={social.link}
-              key={social.name}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center"
-            >
+        <div className="flex gap-5 items-center">
+          <button 
+            onClick={toggleTheme}
+            className="p-2 rounded-full bg-[#52616B] text-[#F0F5F9] hover:bg-[#1E2022] transition-all"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? (
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+              </svg>
+            )}
+          </button>
+          
+          <div className="flex flex-row gap-5">
+            {Socials.map((social) => (
               <Image
+                key={social.name}
                 src={social.src}
                 alt={social.name}
                 width={24}
                 height={24}
               />
-            </a>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
