@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import { Socials } from "@/constants";
 import { useTheme } from "@/context/ThemeContext";
+import { RxGithubLogo, RxLinkedinLogo, RxInstagramLogo } from "react-icons/rx";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -23,7 +23,7 @@ const Navbar = () => {
         </a>
 
         <div className="hidden md:flex w-[31.25rem] h-full flex-row items-center justify-around md:mr-20">
-          <div className="flex items-center justify-between w-full h-auto border border-[var(--border-bg)] bg-[var(--navbar-button-bg)] mr-[0.938rem] px-[1.25rem] py-[0.625rem] rounded-full text-[var(--text-primary)]">
+          <div className="flex items-center justify-between w-full h-auto border border-[var(--border-bg)] bg-[var(--navbar-button-bg)] mr-[0.938rem] px-[1.25rem] py-[0.625rem] rounded-full text-[var(--text-primary)] shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff]">
             <a
               href="#about-me"
               className="cursor-pointer hover:text-[var(--button-hover)] transition-colors duration-300"
@@ -49,7 +49,7 @@ const Navbar = () => {
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-[#52616B] text-[#F0F5F9] hover:bg-[#1E2022] transition-all"
+            className="p-2 rounded-full bg-[#52616B] text-[#F0F5F9] hover:bg-[#1E2022] transition-all shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff]"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
@@ -86,28 +86,38 @@ const Navbar = () => {
           </button>
 
           <div className="flex flex-row gap-5">
-            {Socials.map((social) => (
-              <a
-                key={social.name}
-                href={social.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={social.src}
-                  alt={social.name}
-                  width={24}
-                  height={24}
-                />
-              </a>
-            ))}
+            {/* Social Media Icons */}
+            <a
+              href="https://github.com/AlabasterRig"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full bg-[var(--navbar-socials-bg)] shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff] hover:shadow-lg"
+            >
+              <RxGithubLogo size={24} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/utkrist-jaiswal/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full bg-[var(--navbar-socials-bg)] shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff] hover:shadow-lg"
+            >
+              <RxLinkedinLogo size={24} />
+            </a>
+            <a
+              href="https://www.instagram.com/utkrist2/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full bg-[var(--navbar-socials-bg)] shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff] hover:shadow-lg"
+            >
+              <RxInstagramLogo size={24} />
+            </a>
           </div>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       <div className="flex md:hidden w-full h-auto justify-center mt-2">
-        <div className="flex items-center justify-between w-[90%] border border-[#1E2022] bg-[#52616B] px-4 py-2 rounded-full text-[#F0F5F9]">
+        <div className="flex items-center justify-between w-[90%] border border-[#1E2022] bg-[#52616B] px-4 py-2 rounded-full text-[#F0F5F9] shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff]">
           <a href="#about-me" className="cursor-pointer">
             About Me
           </a>
