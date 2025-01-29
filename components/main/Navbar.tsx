@@ -22,7 +22,7 @@ const Navbar = () => {
           </span>
         </a>
 
-        <div className="hidden md:flex w-[31.25rem] h-full flex-row items-center justify-around md:mr-20">
+        <div className="hidden md:flex w-[31.25rem] h-full flex-row ml-[9.2rem] items-center justify-around md:mr-20">
           <div className="flex items-center justify-between w-full h-auto border border-[var(--border-bg)] bg-[var(--navbar-button-bg)] mr-[0.938rem] px-[1.25rem] py-[0.625rem] rounded-full text-[var(--text-primary)] shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff]">
             <a
               href="#about-me"

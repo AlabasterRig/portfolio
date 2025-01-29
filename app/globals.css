@@ -9,7 +9,7 @@
   --navbar-bg: #040D12;
   --skill-background: #040D12;
   --footer-background: #040D12;
-  --navbar-shadow-bg: #e2e8f0;
+  --navbar-shadow-bg: #040D12;
   --navbar-button-bg: #ffffff;
   --navbar-socials-bg: #ffffff;
   --text-primary: #333333;
@@ -19,6 +19,7 @@
   --text-contact: #F0F5F9;
   --text-skill-title: #F0F5F9;
   --text-skill-des: #F0F5F9;
+  --text-skill: #F0F5F9;
   --text-project: #333333;
   --text-footer: #F0F5F9;
   --button-bg: #1C2B2D;
@@ -31,7 +32,7 @@
   --background: #040D12;
   --navbar-bg: #14274E;
   --skill-background: #31112C;
-  --navbar-shadow-bg: #31112C;
+  --navbar-shadow-bg: #14274E;
   --navbar-button-bg: #31112C;
   --navbar-socials-bg: #31112C;
   --text-primary: #F0F5F9;
