@@ -1,25 +1,72 @@
-@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jersey+15&family=Montserrat&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Light Theme (Default) */
+  --background: #ffffff;
+  --navbar-bg: #040D12;
+  --skill-background: #040D12;
+  --footer-background: #040D12;
+  --navbar-shadow-bg: #040D12;
+  --navbar-button-bg: #ffffff;
+  --navbar-socials-bg: #ffffff;
+  --text-primary: #333333;
+  --text-hero-magic-start: #1E2022;
+  --text-hero-magic-end: #52616B;
+  --text-navbar-main: #F0F5F9;
+  --text-contact: #F0F5F9;
+  --text-skill-title: #F0F5F9;
+  --text-skill-des: #F0F5F9;
+  --text-skill: #F0F5F9;
+  --text-project: #333333;
+  --text-footer: #F0F5F9;
+  --button-bg: #1C2B2D;
+  --button-hover: #4d768c;
+  --box-shadow: #bf97ff70;
+  --border-bg: #e2e8f0;
+}
 
+[data-theme='dark'] {
+  --background: #040D12;
+  --navbar-bg: #14274E;
+  --skill-background: #31112C;
+  --navbar-shadow-bg: #14274E;
+  --navbar-button-bg: #31112C;
+  --navbar-socials-bg: #31112C;
+  --text-primary: #F0F5F9;
+  --text-hero-magic-start: #87431D;
+  --text-hero-magic-end: #0F3460;
+  --text-navbar-main: #F0F5F9;
+  --text-contact: #F0F5F9;
+  --text-skill-title: #F0F5F9;
+  --text-skill-des: #F0F5F9;
+  --text-skill: #F0F5F9;
+  --text-project: #F0F5F9;
+  --text-footer: #F0F5F9;
+  --button-bg: #323232;
+  --button-hover: #0D7377;
+  --box-shadow: #1C2B2D;
+  --border-bg: #1C2B2D;
+}
 
 .cursive {
-  font-family: "Cedarville Cursive", cursive;
+  font-family: "Jersey 15", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
+
 .Welcome-text {
   background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.4),
-      rgba(255, 255, 255, 0.4)
-    ),
-    linear-gradient(90.01deg, #e59cff 0.01%, #ba9cff 50.01%, #9cb2ff 100%);
-  background-blend-mode: normal, screen;
+    0deg,
+    var(--text-hero-magic-start) 0%,
+    var(--text-hero-magic-end) 100%
+  );
   -webkit-background-clip: text;
-  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .Welcome-box {
   isolation: isolate;
   overflow: hidden;
@@ -29,41 +76,79 @@
   border-radius: 32px;
   box-shadow: inset 0 -7px 11px #a48fff1f;
   display: flex;
-
   position: relative;
   width: -moz-max-content;
   width: max-content;
   transition: 0.45s cubic-bezier(0.6, 0.6, 0, 1) box-shadow;
+  padding: 2rem; /* Add padding to ensure content isn't too tight */
+  max-width: 100%; /* Ensure it doesn’t overflow */
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .button-primary {
-  background: linear-gradient(
-      180deg,
-      rgba(60, 8, 126, 0) 0%,
-      rgba(60, 8, 126, 0.32) 100%
-    ),
-    rgba(113, 47, 255, 0.12);
+  background-color: var(--button-bg);
+  color: var(--text-contact);
   box-shadow: inset 0 0 12px #bf97ff3d;
-}
-.button-primary:hover {
-  background: linear-gradient(
-      180deg,
-      rgba(60, 8, 126, 0) 0%,
-      rgba(60, 8, 126, 0.42) 100%
-    ),
-    rgba(113, 47, 255, 0.24);
-  box-shadow: inset 0 0 12px #bf97ff70;
+  padding: 0.75rem 1.5rem; /* Increased padding for better clickability */
+  font-size: 1rem; /* Ensure button text is legible */
+  border-radius: 8px; /* Rounded corners for better appearance */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
+.button-primary:hover {
+  background-color: var(--button-hover);
+  box-shadow: inset 5px 0 30px var(--box-shadow);
+  transform: scale(1.05); /* Slight scale-up for hover */
+}
+
 .scrollbar-hidden {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .Welcome-text {
+    font-size: 1.5rem; /* Ensure the text size adjusts on smaller screens */
+    padding: 0 0.5rem; /* Reduced padding for small screens */
+  }
+
+  .Welcome-box {
+    padding: 1rem; /* Reduced padding on smaller screens */
+    width: 100%; /* Ensure it takes full width */
+  }
+
+  .button-primary {
+    font-size: 0.9rem; /* Adjust button font size for mobile */
+    padding: 0.5rem 1rem; /* Adjust button padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .Welcome-text {
+    font-size: 1.2rem; /* Further adjust font size for very small screens */
+  }
+
+  .button-primary {
+    font-size: 0.8rem; /* Smaller font size for tiny screens */
+  }
+}
+
+/* Accessibility: Focus Styles */
+.button-primary:focus {
+  outline: 2px solid #a48fff;
+  outline-offset: 2px;
 }

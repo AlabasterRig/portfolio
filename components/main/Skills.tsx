@@ -12,12 +12,12 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="flex flex-col items-center justify-center gap-3 h-full relative overflow-hidden py-20"
-      style={{ transform: "scale(0.9)" }}
+      className="flex flex-col items-center bg-[var(--skill-background)] justify-center w-full h-full relative overflow-hidden my-5 py-10 px-0 sm:px-10 transition-colors duration-300"
     >
       <SkillText />
 
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+      {/* Game Development Skills */}
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-4 sm:gap-5 items-center">
         {GameDevelopment_Skill.map((image, index) => (
           <SkillDataProvider
             key={index}
@@ -29,7 +29,8 @@ const Skills = () => {
         ))}
       </div>
 
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+      {/* General Skill Data */}
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-4 sm:gap-5 items-center">
         {Skill_data.map((image, index) => (
           <SkillDataProvider
             key={index}
@@ -41,7 +42,8 @@ const Skills = () => {
         ))}
       </div>
 
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+      {/* Backend Skills */}
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-4 sm:gap-5 items-center">
         {Backend_skill.map((image, index) => (
           <SkillDataProvider
             key={index}
@@ -53,7 +55,8 @@ const Skills = () => {
         ))}
       </div>
 
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+      {/* Other Skills */}
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-4 sm:gap-5 items-center">
         {Other_skill.map((image, index) => (
           <SkillDataProvider
             key={index}
@@ -63,20 +66,6 @@ const Skills = () => {
             index={index}
           />
         ))}
-      </div>
-
-      <div className="w-full h-full absolute">
-        <div className="w-full h-full z-[-10] opacity-30 relative flex items-center justify-center bg-hover object">
-          <video
-            className="w-full h-auto"
-            preload="false"
-            playsInline
-            loop
-            muted
-            autoPlay
-            src="/code-bottom.webm"
-          />
-        </div>
       </div>
     </section>
   );

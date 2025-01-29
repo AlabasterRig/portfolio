@@ -1,31 +1,22 @@
 "use client";
 
 import React from "react";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 import { slideInFromTop, slideInFromLeft, slideInFromRight } from "@/utils/motion";
-import { SparklesIcon } from "@heroicons/react/24/solid";
 
 const SkillText = () => {
   return (
-    <div className="w-full h-auto flex flex-col items-center justify-center">
+    <div className="w-full h-full flex flex-col items-center justify-center px-[1.25rem] sm:px-[2rem] md:px-[3rem]">
       <motion.div
-        variants={slideInFromTop}
-        className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
+        variants={slideInFromLeft(0.5)}
+        className="text-[1.5rem] sm:text-[2rem] md:text-[2.2rem] text-[var(--text-skill-title)] font-medium mt-[1rem] mb-[1rem] text-center transition-colors duration-300"
       >
-        <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
-        <h1 className="Welcome-text text-[13px]">Lorem Ipsum</h1>
+        Using modern skills to build stuff
       </motion.div>
 
       <motion.div
-      variants={slideInFromLeft(0.5)}
-      className="text-[30px] text-white font-medium mt-[10px] text-center mb-[10px]"
-      >
-        Using mordern skills to build stuff
-      </motion.div>
-
-      <motion.div
-      variants={slideInFromRight(0.5)}
-      className="cursive text-[20px] text-white mb-10 mt-[10px] text-center"
+        variants={slideInFromRight(0.5)}
+        className="cursive text-[1.25rem] sm:text-[1.75rem] md:text-[2rem] text-[var(--text-skill-des)] mb-[1.25rem] mt-[1rem] text-center transition-colors duration-300"
       >
         Never back down from a challenge
       </motion.div>

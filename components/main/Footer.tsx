@@ -1,52 +1,67 @@
 import React from "react";
-import {
-  RxGithubLogo,
-  RxLinkedinLogo,
-  RxInstagramLogo,
-} from "react-icons/rx";
+import { RxGithubLogo, RxLinkedinLogo, RxInstagramLogo } from "react-icons/rx";
 
 const Footer = () => {
   return (
-    <div className="w-full h-full relative text-white shadow-lg p-[15px] ">
-      <div className="w-full flex flex-col items-center justify-center m-auto">
-        <div className="w-full h-full flex flex-row items-center justify-around flex-wrap">
-          <div className="min-w-[200px] h-auto flex flex-col justify-start items-center">
-            <div className="font-bold text-[16px]">Community</div>
-            <p className="flex flex-row items-center my-[40px] cursor-pointer">
+    
+    <div className="w-full bg-[var(--footer-background)] text-[var(--text-footer)] z-10 relative">
+      <div className="w-full flex flex-col items-center justify-center px-5 sm:px-10 pt-10">
+        {/* Footer Links */}
+        <div className="w-full flex flex-wrap justify-center md:justify-around gap-10 text-center">
+          {/* Community Section */}
+          <div className="min-w-[12rem] sm:min-w-[15rem] h-auto flex flex-col items-center">
+            <div className="font-bold text-lg sm:text-xl mb-4">Community</div>
+            <p className="flex flex-row items-center my-3 cursor-pointer hover:text-[var(--button-hover)] transition-colors duration-300">
               <RxGithubLogo />
-              <a href="https://github.com/AlabasterRig" className="text-[15px] ml-[6px]">GitHub</a>
+              <a href="https://github.com/AlabasterRig" className="ml-2 text-sm sm:text-base">
+                GitHub
+              </a>
             </p>
           </div>
 
-          <div className="min-w-[200px] h-auto flex flex-col items-center justify-start">
-            <div className="font-bold text-[16px]">Social Media</div>
-            <p className="flex flex-row items-center my-[15px] cursor-pointer">
+          {/* Social Media Section */}
+          <div className="min-w-[12rem] sm:min-w-[15rem] h-auto flex flex-col items-center">
+            <div className="font-bold text-lg sm:text-xl mb-4">Socials</div>
+            <p className="flex flex-row items-center my-3 cursor-pointer hover:text-[var(--button-hover)] transition-colors duration-300">
               <RxInstagramLogo />
-              <a href="https://www.instagram.com/utkrist2/" className="text-[15px] ml-[6px]">Instagram</a>
+              <a href="https://www.instagram.com/utkrist2/" 
+                 className="ml-2 text-sm sm:text-base">
+                Instagram
+              </a>
             </p>
-
-            <p className="flex flex-row items-center my-[15px] cursor-pointer">
+            <p className="flex flex-row items-center my-3 cursor-pointer hover:text-[var(--button-hover)] transition-colors duration-300">
               <RxLinkedinLogo />
-              <a href="https://www.linkedin.com/in/utkrist-jaiswal/" className="text-[15px] ml-[6px]">Linkedin</a>
+              <a href="https://www.linkedin.com/in/utkrist-jaiswal/"
+                 className="ml-2 text-sm sm:text-base">
+                Linkedin
+              </a>
             </p>
           </div>
 
-          <div className="min-w-[200px] h-auto flex flex-col items-center justify-start">
-            <div className="font-bold text-[16px]">About</div>
-            <p className="flex flex-row items-center my-[15px] cursor-pointer">
-              <a href="mailto:contact@utkri.st" className="text-[15px] ml-[6px]">contact@utkri.st</a>
+          {/* About Section */}
+          <div className="min-w-[12rem] sm:min-w-[15rem] h-auto flex flex-col items-center">
+            <div className="font-bold text-lg sm:text-xl mb-4">About</div>
+            <p className="flex flex-row items-center my-3">
+              <a href="mailto:contact@utkri.st"
+                 className="ml-2 text-sm sm:text-base hover:text-[var(--button-hover)] transition-colors duration-300">
+                Email
+              </a>
             </p>
-
-            <p className="flex flex-row items-center my-[15px] cursor-pointer">
-              <a href="https://drive.google.com/file/d/1AR4oDPWyQT5Jl4lCaYBhmsgh5i4aCF-J/view?usp=sharing"><span className="text-[15px] ml-[6px]">Resume</span></a>
+            <p className="flex flex-row items-center my-3">
+              <a href="https://drive.google.com/file/d/1AR4oDPWyQT5Jl4lCaYBhmsgh5i4aCF-J/view?usp=sharing"
+                 className="ml-2 text-sm sm:text-base hover:text-[var(--button-hover)] transition-colors duration-300">
+                Resume
+              </a>
             </p>
           </div>
         </div>
 
-        <div className="mb-[20px] text-[15px] text-center ">
+        {/* Footer Bottom */}
+        <div className="w-full h-auto flex justify-center py-4 bg-[var(--footer-background)]">
+          <div className="text-sm sm:text-base text-[var(--text-footer)] text-center">
             &copy; Utkrist Jaiswal
+          </div>
         </div>
-
       </div>
     </div>
   );
