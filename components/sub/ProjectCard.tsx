@@ -1,69 +1,110 @@
 "use client";
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
 import { fadeIn } from '@/utils/motion';
+import { CodeBracketIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
-interface Props {
-  src: string;
+interface ProjectCardProps {
   title: string;
   description: string;
+  src: string;
+  techStack: string[];
+  demoLink: string;
+  githubLink: string;
   index: number;
 }
 
-const ProjectCard = ({ src, title, description, index }: Props) => {
+const ProjectCard = ({ 
+  title,
+  description,
+  src,
+  techStack,
+  demoLink,
+  githubLink,
+  index
+}: ProjectCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [imgSrc, setImgSrc] = useState(src);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Parallax effect
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-100, 100], [10, -10]);
+  const rotateY = useTransform(x, [-100, 100], [-10, 10]);
+
+  // Handle Escape key press
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      setIsOpen(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
+      modalRef.current?.focus();
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [isOpen]);
 
-  const toggleModal = () => setIsOpen(!isOpen);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, handleKeyDown]);
 
   return (
     <>
       {/* Main Card */}
       <motion.div
-        variants={fadeIn('right', 'spring', index * 0.5, 0.75)}
-        className="relative overflow-hidden rounded-lg shadow-lg border border-[var(--background)] w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] cursor-pointer group"
-        onClick={toggleModal}
+        variants={fadeIn('right', 'spring', index * 0.2, 0.75)}
+        className="relative group h-[400px] w-full"
+        style={{ perspective: 1000 }}
       >
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
-        
-        {/* Image Section */}
         <motion.div
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: 'spring', stiffness: 200 }}
-          className="relative h-64 sm:h-72 md:h-80" // Fixed height container
+          className="h-full w-full rounded-xl shadow-xl overflow-hidden cursor-pointer bg-gradient-to-br from-purple-500/10 to-transparent"
+          style={{ rotateX, rotateY }}
+          onMouseMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            x.set(e.clientX - rect.left - rect.width / 2);
+            y.set(e.clientY - rect.top - rect.height / 2);
+          }}
+          onMouseLeave={() => {
+            x.set(0);
+            y.set(0);
+          }}
+          onClick={() => setIsOpen(true)}
+          whileHover={{ scale: 1.03 }}
+          transition={{ type: "spring", stiffness: 300 }}
         >
-          <Image
-            src={src}
-            alt={`${title} project screenshot`}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover rounded-t-lg"
-          />
-        </motion.div>
+          <div className="relative h-2/3 w-full">
+            <Image
+              src={imgSrc}
+              alt={`${title} screenshot`}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+              onError={() => setImgSrc('/fallback-project.jpg')}
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII="
+            />
+          </div>
 
-        {/* Card Content */}
-        <motion.div
-          initial={{ y: 50 }}
-          whileInView={{ y: 0 }}
-          viewport={{ once: true, margin: "0px 0px -100px 0px" }}
-          transition={{ type: 'spring', stiffness: 100 }}
-          className="absolute bottom-0 left-0 right-0 p-4 bg-[var(--button-bg)]/80 backdrop-blur-lg rounded-b-lg transition-colors duration-300 z-20"
-        >
-          <h1 className="text-xl sm:text-2xl font-semibold text-[var(--text-skill-title)]">
-            {title}
-          </h1>
-          <div className="mt-2 h-[50px] sm:h-[50px] overflow-y-auto text-sm sm:text-base text-[var(--text-skill-des)]">
-            {description}
+          <div className="p-6 bg-gradient-to-t from-black/80 via-transparent to-transparent">
+            <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+            <p className="text-gray-300 line-clamp-2 mb-4">{description}</p>
+            <div className="flex flex-wrap gap-2">
+              {techStack.map((tech) => (
+                <span 
+                  key={tech}
+                  className="px-3 py-1 text-sm bg-purple-500/20 text-purple-300 rounded-full"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
         </motion.div>
       </motion.div>
@@ -72,49 +113,85 @@ const ProjectCard = ({ src, title, description, index }: Props) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            key="project-modal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-50"
-            onClick={toggleModal}
+            className="fixed inset-0 bg-black/70 backdrop-blur-xl z-50 flex items-center justify-center p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              ref={modalRef}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="relative bg-[var(--background)] w-[90%] sm:w-[70%] md:w-[60%] lg:w-[50%] max-h-[80%] rounded-lg overflow-y-auto shadow-lg p-6"
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative bg-[var(--background)] max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
+              tabIndex={-1}
             >
-              {/* Close Button */}
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={toggleModal}
-                className="absolute top-3 right-3 text-[var(--text-project)] hover:text-[var(--text-primary)] text-3xl"
+                onClick={() => setIsOpen(false)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                 aria-label="Close modal"
               >
-                &times;
+                <span className="text-2xl text-white">&times;</span>
               </motion.button>
 
-              {/* Modal Content */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <div className="relative h-64 sm:h-72 md:h-96 mb-4">
+              <div className="p-8">
+                <div className="relative h-64 w-full mb-6 rounded-xl overflow-hidden">
                   <Image
-                    src={src}
-                    alt={`${title} project screenshot`}
+                    src={imgSrc}
+                    alt={`${title} screenshot`}
                     fill
-                    sizes="(max-width: 768px) 100vw, 70vw"
-                    className="object-cover rounded-lg"
+                    className="object-cover"
+                    onError={() => setImgSrc('/fallback-project.jpg')}
                   />
                 </div>
-                <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">{title}</h2>
-                <p className="text-[var(--text-project)]">{description}</p>
-              </motion.div>
+
+                <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">
+                  {title}
+                </h2>
+
+                <p className="text-[var(--text-secondary)] mb-6">{description}</p>
+
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex gap-4">
+                  <motion.a
+                    href={demoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ y: -2 }}
+                    className="flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                  >
+                    <ArrowTopRightOnSquareIcon className="w-5 h-5" />
+                    Live Demo
+                  </motion.a>
+
+                  <motion.a
+                    href={githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ y: -2 }}
+                    className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                  >
+                    <CodeBracketIcon className="w-5 h-5" />
+                    View Code
+                  </motion.a>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}

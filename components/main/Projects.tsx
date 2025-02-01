@@ -1,25 +1,32 @@
-"use client"
-
-import { motion } from 'framer-motion'; // Removed unused React import
+"use client";
+import { motion } from 'framer-motion';
 import ProjectCard from '../sub/ProjectCard';
-import { staggerContainer, fadeIn } from '@/utils/motion';
+import { staggerContainer, fadeIn, Project } from '@/utils/motion';
 
-// Add proper project data
-const projects = [
+const projects: Project[] = [
   {
-    src: "/Pic1.jpg",
     title: "Fall Guy Survival",
-    description: "A thrilling multiplayer game where players compete in various obstacle courses.",
+    description: "Multiplayer obstacle course game",
+    src: "/Pic1.jpg",
+    techStack: ["Unity", "C#", "Photon"],
+    demoLink: "#",
+    githubLink: "#"
   },
   {
-    src: "/Pic2.jpg",
     title: "3D Engine",
-    description: "A custom-built 3D engine with real-time rendering and physics simulations.",
+    description: "Custom 3D rendering engine",
+    src: "/Pic2.jpg",
+    techStack: ["C++", "OpenGL", "GLSL"],
+    demoLink: "#",
+    githubLink: "#"
   },
   {
-    src: "/Pic3.jpg",
     title: "Dungeon Traveller",
-    description: "An adventure game where players explore dungeons and solve puzzles.",
+    description: "Procedural dungeon crawler",
+    src: "/Pic3.jpg",
+    techStack: ["Unreal", "C++", "AI"],
+    demoLink: "#",
+    githubLink: "#"
   },
 ];
 
@@ -27,37 +34,35 @@ const Projects = () => {
   return (
     <section 
       id="projects" 
-      className="w-full py-10 sm:py-20 my-5 px-5 sm:px-10 bg-[var(--background)] transition-colors duration-300"
-      role="region" 
+      className="relative w-full py-20 px-4 sm:px-8 bg-[var(--background)]"
       aria-label="Projects section"
     >
+      {/* Animated background */}
+      <div className="absolute inset-0 bg-gradient-radial from-purple-500/10 to-transparent animate-pulse-slow opacity-20" />
+      
       <motion.div
-        variants={staggerContainer(0.1, 0.2)} // Added proper parameters
+        variants={staggerContainer()}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.1 }} // Adjusted viewport amount
-        className="flex flex-col items-center justify-center w-full"
+        viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+        className="max-w-7xl mx-auto"
       >
-        {/* Section Header */}
         <motion.h1
-          variants={fadeIn('down', 'spring', 0.1, 1)}
-          className="relative text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] pb-10"
+          variants={fadeIn('down', 'spring', 0.2, 1)}
+          className="text-4xl sm:text-5xl font-bold text-center mb-16 text-[var(--text-primary)]"
         >
-          My Projects
+          Featured Projects
         </motion.h1>
 
-        {/* Project Cards Container */}
         <motion.div
-          variants={fadeIn('up', 'spring', 0.2, 1)} // Adjusted animation timing
-          className="flex flex-col sm:flex-row gap-10 w-full max-w-screen-xl justify-center"
+          variants={fadeIn('up', 'spring', 0.3, 1)}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {projects.map((project, index) => (
             <ProjectCard
-              key={project.title} // Better key using unique identifier
-              src={project.src}
-              title={project.title}
-              description={project.description}
+              key={project.title}
               index={index}
+              {...project}
             />
           ))}
         </motion.div>

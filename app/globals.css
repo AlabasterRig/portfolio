@@ -157,3 +157,13 @@ html {
   outline: 2px solid #a48fff;
   outline-offset: 2px;
 }
+
+@keyframes text-shine {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+.text-gradient-animate {
+  background-size: 200% auto;
+  animation: text-shine 3s linear infinite;
+}
