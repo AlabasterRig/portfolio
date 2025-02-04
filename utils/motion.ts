@@ -96,7 +96,7 @@ export const textVariant = (delay: number): Variants => ({
 export interface Project {
   title: string;
   description: string;
-  src: string;
+  images: string[];
   techStack: string[];
   demoLink: string;
   githubLink: string;

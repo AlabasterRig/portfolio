@@ -6,16 +6,24 @@ import { staggerContainer, fadeIn, Project } from '@/utils/motion';
 const projects: Project[] = [
   {
     title: "Fall Guy Survival",
-    description: "Multiplayer obstacle course game",
-    src: "/Pic1.jpg",
-    techStack: ["Unity", "C#", "Photon"],
+    description: "This survival game, developed using Unreal Engine 5, demonstrates the core game logic and advanced coding techniques. The project emphasizes seamless integration of C++ and Blueprints, showcasing the versatility of both programming approaches in game development. Key features include a dynamic game world with interactive mechanics and player challenges, all carefully crafted to enhance gameplay experience. The project provides detailed explanations of the systems implemented, covering gameplay mechanics, AI behavior, and environmental interaction. It serves as a comprehensive example of my ability to create complex game logic and integrate various development tools to bring a game concept to life.",
+    images: [
+      "/Pic1.jpg",
+      "/Pic2.jpg",
+      "/Pic3.jpg"
+    ],
+    techStack: ["Unreal", "C++", "Blueprints"],
     demoLink: "#",
     githubLink: "#"
   },
   {
     title: "3D Engine",
     description: "Custom 3D rendering engine",
-    src: "/Pic2.jpg",
+    images: [
+      "/Pic2.jpg",
+      "/Pic3.jpg",
+      "/Pic1.jpg"
+    ],
     techStack: ["C++", "OpenGL", "GLSL"],
     demoLink: "#",
     githubLink: "#"
@@ -23,7 +31,11 @@ const projects: Project[] = [
   {
     title: "Dungeon Traveller",
     description: "Procedural dungeon crawler",
-    src: "/Pic3.jpg",
+    images: [
+      "/Pic3.jpg",
+      "/Pic1.jpg",
+      "/Pic2.jpg"
+    ],
     techStack: ["Unreal", "C++", "AI"],
     demoLink: "#",
     githubLink: "#"
@@ -60,9 +72,14 @@ const Projects = () => {
         >
           {projects.map((project, index) => (
             <ProjectCard
-              key={project.title}
-              index={index}
-              {...project}
+            key={project.title}
+            index={index}
+            title={project.title}
+            description={project.description}
+            images={project.images} // Passing the images array
+            techStack={project.techStack}
+            demoLink={project.demoLink}
+            githubLink={project.githubLink}
             />
           ))}
         </motion.div>

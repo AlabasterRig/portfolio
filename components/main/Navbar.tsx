@@ -1,65 +1,155 @@
+"use client";
+
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
-import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  RxGithubLogo,
+  RxLinkedinLogo,
+  RxInstagramLogo,
+  RxHamburgerMenu,
+  RxCross2,
+} from "react-icons/rx";
 import { useTheme } from "@/context/ThemeContext";
-import { RxGithubLogo, RxLinkedinLogo, RxInstagramLogo } from "react-icons/rx";
+import { slideInFromLeft, slideInFromRight } from "@/utils/motion";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const navRef = useRef(null);
+
+  // Define navLinks and socialLinks with useMemo to avoid re-creation on every render.
+  const navLinks = useMemo(
+    () => [
+      { id: "about-me", label: "About Me" },
+      { id: "skills", label: "Skills" },
+      { id: "projects", label: "Projects" },
+    ],
+    []
+  );
+
+  const socialLinks = useMemo(
+    () => [
+      { icon: RxGithubLogo, href: "https://github.com/AlabasterRig" },
+      { icon: RxLinkedinLogo, href: "https://linkedin.com/in/utkrist-jaiswal" },
+      { icon: RxInstagramLogo, href: "https://instagram.com/utkrist2" },
+    ],
+    []
+  );
+
+  // Scroll Spy: Detect which section is currently in view.
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.6, // Trigger when 60% of the section is visible.
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, options);
+
+    navLinks.forEach((link) => {
+      const section = document.getElementById(link.id);
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [navLinks]);
+
+  // Close mobile menu when clicking outside of it.
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        mobileMenuOpen &&
+        navRef.current &&
+        !navRef.current.contains(event.target)
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [mobileMenuOpen]);
 
   return (
-    <div className="w-full h-[4.063rem] fixed top-0 shadow-md shadow-[var(--navbar-shadow-bg)] bg-[var(--navbar-bg)] backdrop-blur-lg z-50 px-5 sm:px-10">
-      <div className="w-full h-full flex flex-row items-center justify-between m-auto px-[0.625rem]">
-        <a href="/" className="h-auto w-auto flex flex-row items-center">
-          <Image
-            src="/Navlogo.svg"
-            alt="logo"
-            width={20}
-            height={20}
-            className="cursor-pointer hover:animate-bounce pb-1"
-          />
-          <span className="font-bold ml-[0.625rem] hidden sm:block text-[var(--text-navbar-main)]">
-            Game Developer
-          </span>
-        </a>
+    <motion.nav
+      ref={navRef}
+      role="navigation"
+      initial="hidden"
+      animate="visible"
+      className="fixed top-0 w-full z-50 bg-[var(--navbar-bg)] backdrop-blur-lg gap-14 shadow-lg shadow-[var(--navbar-shadow-bg)] px-4 sm:px-8 h-16"
+    >
+      <div className="max-w-7xl mx-auto h-full flex items-center justify-between">
+        {/* Logo Section */}
+        <motion.div variants={slideInFromLeft(0.5)} className="flex items-center">
+          <a href="/" className="flex items-center gap-2">
+            <Image
+              src="/Navlogo.svg"
+              alt="Logo"
+              width={28}
+              height={28}
+              className="transition-transform duration-300 hover:animate-bounce"
+            />
+            <span className="hidden sm:block font-bold text-lg text-[var(--text-navbar-main)]">
+              Game Developer
+            </span>
+          </a>
+        </motion.div>
 
-        <div className="hidden md:flex w-[31.25rem] h-full flex-row ml-[9.2rem] items-center justify-around md:mr-20">
-          <div className="flex items-center justify-between w-full h-auto border border-[var(--border-bg)] bg-[var(--navbar-button-bg)] mr-[0.938rem] px-[1.25rem] py-[0.625rem] rounded-full text-[var(--text-primary)] shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff]">
-            <a
-              href="#about-me"
-              className="cursor-pointer hover:text-[var(--button-hover)] transition-colors duration-300"
-            >
-              About Me
-            </a>
-            <a
-              href="#skills"
-              className="cursor-pointer hover:text-[var(--button-hover)] transition-colors duration-300"
-            >
-              Skills
-            </a>
-            <a
-              href="#projects"
-              className="cursor-pointer hover:text-[var(--button-hover)] transition-colors duration-300"
-            >
-              Projects
-            </a>
+        {/* Desktop Navigation */}
+        <motion.div
+          variants={slideInFromRight(0.5)}
+          className="hidden md:flex items-center gap-8"
+        >
+          <div className="flex items-center gap-14 bg-[var(--navbar-button-bg)] px-6 py-2 rounded-full border border-[var(--border-bg)] shadow-nav">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                className={`transition-colors duration-300 ${
+                  activeSection === link.id
+                    ? "text-[var(--button-hover)] font-medium"
+                    : "text-[var(--text-primary)] hover:text-[var(--button-hover)]"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div className="flex gap-5 items-center">
+        {/* Right Section: Theme Toggle & Social Links */}
+        <motion.div
+          variants={slideInFromRight(0.8)}
+          className="flex items-center gap-4"
+        >
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-[#52616B] text-[#F0F5F9] hover:bg-[#1E2022] transition-all shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff]"
             aria-label="Toggle theme"
+            className="p-2 rounded-full bg-[var(--theme-toggle-bg)] text-[var(--theme-toggle-text)] hover:bg-[var(--theme-toggle-hover)] transition-all shadow-theme"
           >
             {theme === "dark" ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
                 className="w-6 h-6"
+                fill="white"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
                 <path
                   strokeLinecap="round"
@@ -70,11 +160,10 @@ const Navbar = () => {
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
                 className="w-6 h-6"
+                fill="white"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
                 <path
                   strokeLinecap="round"
@@ -85,51 +174,82 @@ const Navbar = () => {
             )}
           </button>
 
-          <div className="flex flex-row gap-5">
-            {/* Social Media Icons */}
-            <a
-              href="https://github.com/AlabasterRig"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-full bg-[var(--navbar-socials-bg)] shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff] hover:shadow-lg"
-            >
-              <RxGithubLogo size={24} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/utkrist-jaiswal/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-full bg-[var(--navbar-socials-bg)] shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff] hover:shadow-lg"
-            >
-              <RxLinkedinLogo size={24} />
-            </a>
-            <a
-              href="https://www.instagram.com/utkrist2/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-full bg-[var(--navbar-socials-bg)] shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff] hover:shadow-lg"
-            >
-              <RxInstagramLogo size={24} />
-            </a>
+          {/* Desktop Social Links */}
+          <div className="hidden md:flex items-center gap-4">
+            {socialLinks.map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-2 rounded-full bg-[var(--navbar-socials-bg)] shadow-social hover:shadow-social-hover"
+              >
+                <social.icon size={24} className="text-[var(--social-icon)]" />
+              </motion.a>
+            ))}
           </div>
-        </div>
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            className="md:hidden p-2 rounded-full bg-[var(--navbar-socials-bg)] shadow-social focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--theme-toggle-hover)]"
+            aria-label="Toggle mobile menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? (
+              <RxCross2 size={24} className="text-[var(--social-icon)]" />
+            ) : (
+              <RxHamburgerMenu size={24} className="text-[var(--social-icon)]" />
+            )}
+          </button>
+        </motion.div>
       </div>
 
-      {/* Mobile Navigation */}
-      <div className="flex md:hidden w-full h-auto justify-center mt-2">
-        <div className="flex items-center justify-between w-[90%] border border-[#1E2022] bg-[#52616B] px-4 py-2 rounded-full text-[#F0F5F9] shadow-[2px_2px_5px_#a5a5a5, -2px_-2px_5px_#ffffff]">
-          <a href="#about-me" className="cursor-pointer">
-            About Me
-          </a>
-          <a href="#skills" className="cursor-pointer">
-            Skills
-          </a>
-          <a href="#projects" className="cursor-pointer">
-            Projects
-          </a>
-        </div>
-      </div>
-    </div>
+      {/* Mobile Navigation Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden absolute top-16 left-0 right-0 bg-[var(--navbar-bg)] backdrop-blur-lg py-4 px-6 shadow-lg"
+          >
+            <div className="flex flex-col items-center gap-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  className={`transition-colors duration-300 ${
+                    activeSection === link.id
+                      ? "text-[var(--button-hover)] font-medium"
+                      : "text-[var(--text-primary)] hover:text-[var(--button-hover)]"
+                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <div className="flex gap-4 mt-4">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-full bg-[var(--navbar-socials-bg)] shadow-social hover:shadow-social-hover"
+                  >
+                    <social.icon size={24} className="text-[var(--social-icon)]" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 
