@@ -18,7 +18,7 @@ const Skills = () => {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
-      className="flex flex-col items-center bg-[var(--skill-background)] justify-center w-full h-full relative overflow-hidden py-16 px-4 sm:px-8"
+      className="flex flex-col items-center bg-[var(--skill-background)] rounded-3xl transition-all justify-center w-full h-full relative overflow-hidden py-16 px-4 sm:px-8"
     >
       <motion.div
         variants={fadeIn("down", "spring", 0.2, 1)}
