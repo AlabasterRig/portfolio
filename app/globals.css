@@ -4,6 +4,9 @@
 /* Ensure Tailwind CSS is properly installed and configured */
 /* Check if Tailwind is included in postcss.config.mjs and tailwind.config.ts */
 /* Ensure Tailwind CSS is properly configured */
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

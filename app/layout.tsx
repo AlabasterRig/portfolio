@@ -22,7 +22,7 @@ const ThemeInitializer = () => {
     document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
   return null;
-}
+};
 
 export default function RootLayout({
   children,
@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full w-full`}>
       <body>
         <ThemeProvider>
           <ThemeInitializer />
