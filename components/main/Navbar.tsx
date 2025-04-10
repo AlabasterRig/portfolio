@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
+import Link from 'next/link';
 import { motion, AnimatePresence } from "framer-motion";
 import {
   RxGithubLogo,
@@ -17,7 +18,7 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const navRef = useRef(null);
+  const navRef = useRef<HTMLElement | null>(null);
 
   // Define navLinks and socialLinks with useMemo to avoid re-creation on every render.
   const navLinks = useMemo(
@@ -46,7 +47,7 @@ const Navbar = () => {
       threshold: 0.6, // Trigger when 60% of the section is visible.
     };
 
-    const observerCallback = (entries) => {
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActiveSection(entry.target.id);
@@ -70,11 +71,12 @@ const Navbar = () => {
 
   // Close mobile menu when clicking outside of it.
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         mobileMenuOpen &&
         navRef.current &&
-        !navRef.current.contains(event.target)
+        navRef.current instanceof HTMLElement &&
+        !navRef.current.contains(event.target as Node)
       ) {
         setMobileMenuOpen(false);
       }
@@ -95,7 +97,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto h-full flex items-center justify-between">
         {/* Logo Section */}
         <motion.div variants={slideInFromLeft(0.5)} className="flex items-center">
-          <a href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src="/Navlogo.svg"
               alt="Logo"
@@ -106,7 +108,7 @@ const Navbar = () => {
             <span className="hidden sm:block font-bold text-lg text-[var(--text-navbar-main)]">
               Game Developer
             </span>
-          </a>
+          </Link>
         </motion.div>
 
         {/* Desktop Navigation */}

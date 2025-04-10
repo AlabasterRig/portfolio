@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Jersey+15&family=Montserrat&display=swap");
+/* Ensure Tailwind CSS is installed and configured */
+/* Run `npm install tailwindcss` and verify `tailwind.config.ts` and `postcss.config.mjs` */
+/* Ensure Tailwind CSS is properly installed and configured */
+/* Check if Tailwind is included in postcss.config.mjs and tailwind.config.ts */
+/* Ensure Tailwind CSS is properly configured */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -29,13 +34,13 @@
 }
 
 [data-theme='dark'] {
-  --background: #040D12;
+  --background: #121212;
   --navbar-bg: #14274E;
   --skill-background: #31112C;
   --navbar-shadow-bg: #14274E;
   --navbar-button-bg: #31112C;
   --navbar-socials-bg: #31112C;
-  --text-primary: #F0F5F9;
+  --text-primary: #e0e0e0;
   --text-hero-magic-start: #87431D;
   --text-hero-magic-end: #0F3460;
   --text-navbar-main: #F0F5F9;
@@ -46,7 +51,7 @@
   --text-project: #F0F5F9;
   --text-footer: #F0F5F9;
   --button-bg: #323232;
-  --button-hover: #0D7377;
+  --button-hover: #bb86fc;
   --box-shadow: #1C2B2D;
   --border-bg: #1C2B2D;
 }
@@ -64,6 +69,7 @@
     var(--text-hero-magic-end) 100%
   );
   -webkit-background-clip: text;
+  background-clip: text; /* Standard property */
   -webkit-text-fill-color: transparent;
 }
 
@@ -89,6 +95,7 @@ body {
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
+  cursor: url('/custom-cursor.png'), auto;
 }
 
 * {
@@ -158,6 +165,16 @@ html {
   outline-offset: 2px;
 }
 
+button:focus, a:focus {
+  outline: 2px solid var(--button-hover);
+  outline-offset: 2px;
+}
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--button-hover);
+  outline-offset: 2px;
+}
+
 @keyframes text-shine {
   from { background-position: 0% 50%; }
   to { background-position: 100% 50%; }
@@ -166,4 +183,14 @@ html {
 .text-gradient-animate {
   background-size: 200% auto;
   animation: text-shine 3s linear infinite;
+}
+
+.loading-3d {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--navbar-button-bg);
+  border-radius: 1rem;
 }

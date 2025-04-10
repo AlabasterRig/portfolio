@@ -1,16 +1,24 @@
 'use client';
-import { useTheme } from '@/context/ThemeContext';
+import { useContext } from "react";
+import { ThemeContext } from "@/context/ThemeContext";
 
-export default function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
-  
+const ThemeToggle = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("ThemeToggle must be used within a ThemeProvider");
+  }
+
+  const { theme, toggleTheme } = context;
+
   return (
-    <button 
+    <button
       onClick={toggleTheme}
-      className="theme-toggle"
-      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      className="p-2 rounded-full bg-gray-200 dark:bg-gray-800"
+      aria-label="Toggle theme"
     >
-      {theme === 'dark' ? '☀️' : '🌙'}
+      {theme === "light" ? "🌞" : "🌙"}
     </button>
   );
-}
+};
+
+export default ThemeToggle;

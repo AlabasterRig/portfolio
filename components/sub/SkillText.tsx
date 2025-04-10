@@ -22,7 +22,7 @@ const SkillText = () => {
           variants={slideInFromRight(0.8)}
           className="block mt-2 text-xl sm:text-2xl md:text-3xl font-normal"
         >
-          Building Tomorrow's Solutions Today
+          Building Tomorrow&apos;s Solutions Today
         </motion.span>
       </motion.h1>
 

@@ -1,59 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Environment, useGLTF, Html } from "@react-three/drei";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { slideInFromLeft, slideInFromRight } from "@/utils/motion";
-
-// // 3D Model Component with hover interaction
-// const Model = ({ modelPath }: { modelPath: string }) => {
-//   const { scene } = useGLTF(modelPath);
-//   const [hovered, setHovered] = useState(false);
-
-//   return (
-//     <primitive 
-//       object={scene} 
-//       scale={hovered ? 1.05 : 1}
-//       onPointerOver={() => setHovered(true)}
-//       onPointerOut={() => setHovered(false)}
-//     />
-//   );
-// };
-
-// // 3D Viewer Component with loading state
-// const ThreeDViewer = () => (
-//   <Canvas
-//     camera={{ position: [0, 1, 3], fov: 50 }}
-//     style={{ width: '100%', height: '100%' }}
-//     shadows
-//   >
-//     <ambientLight intensity={0.5} />
-//     <directionalLight
-//       position={[5, 5, 5]}
-//       intensity={1}
-//       color="#ffffff"
-//       castShadow
-//     />
-//     <Suspense fallback={
-//       <Html center>
-//         <div className="text-lg text-[var(--text-primary)] animate-pulse">
-//           Loading Model...
-//         </div>
-//       </Html>
-//     }>
-//       <Model modelPath="/models/character.glb" />
-//       <Environment preset="sunset" />
-//     </Suspense>
-//     <OrbitControls
-//       enableZoom={false}
-//       autoRotate
-//       autoRotateSpeed={1.5}
-//       maxPolarAngle={Math.PI / 1.8}
-//       minPolarAngle={Math.PI / 3}
-//     />
-//   </Canvas>
-// );
+import { slideInFromLeft } from "@/utils/motion";
 
 const HeroContent = () => {
   const [showScrollDown, setShowScrollDown] = useState(true);
@@ -113,17 +62,6 @@ const HeroContent = () => {
         </motion.a>
       </div>
 
-      {/* 3D Viewer Section */}
-      <motion.div
-        variants={slideInFromRight(0.8)}
-        className="w-full flex justify-center items-center mt-10 md:mt-0 h-[500px] md:h-[600px]"
-      >
-        <div className="w-full max-w-md sm:max-w-lg h-full bg-[var(--navbar-button-bg)] rounded-xl overflow-hidden 
-          shadow-2xl border-2 border-[var(--border-bg)]">
-          {/* <ThreeDViewer /> */}
-        </div>
-      </motion.div>
-
       {/* Scroll Down Button */}
       <AnimatePresence>
         {showScrollDown && (
@@ -153,7 +91,6 @@ const HeroContent = () => {
         )}
       </AnimatePresence>
     </motion.div>
-
   );
 };
 

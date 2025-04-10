@@ -1,7 +1,18 @@
 "use client";
 import { motion } from 'framer-motion';
+import { staggerContainer, fadeIn } from '@/utils/motion';
 import ProjectCard from '../sub/ProjectCard';
-import { staggerContainer, fadeIn, Project } from '@/utils/motion';
+import { useState, useMemo } from "react";
+
+// Updated the 'Project' type to include the 'category' property.
+type Project = {
+  title: string;
+  description: string;
+  images: string[];
+  techStack: string[];
+  githubLink: string;
+  category: string;
+};
 
 const projects: Project[] = [
   {
@@ -13,8 +24,17 @@ const projects: Project[] = [
       "/Pic3.jpg"
     ],
     techStack: ["Unreal", "C++", "Blueprints"],
-    demoLink: "#",
-    githubLink: "#"
+    githubLink: "https://github.com/AlabasterRig/FallGuySurvival",
+    category: "game"
+  },
+  {
+    title: "Pokemon",
+    description: "Pokemon game clone",
+    images: [
+      "/Pic1.jpg",],
+    techStack: ["C++", "Windows Console"],
+    githubLink: "https://github.com/AlabasterRig/Pokemon/tree/Feature_10_Interfaces",
+    category: "game"
   },
   {
     title: "3D Engine",
@@ -24,25 +44,42 @@ const projects: Project[] = [
       "/Pic3.jpg",
       "/Pic1.jpg"
     ],
-    techStack: ["C++", "OpenGL", "GLSL"],
-    demoLink: "#",
-    githubLink: "#"
+    techStack: ["C++", "Windows Console"],
+    githubLink: "https://github.com/AlabasterRig/3D-Engine",
+    category: "game"
   },
   {
-    title: "Dungeon Traveller",
-    description: "Procedural dungeon crawler",
+    title: "Subscription Tracker API",
+    description: "Subscription Tracker",
     images: [
-      "/Pic3.jpg",
       "/Pic1.jpg",
-      "/Pic2.jpg"
     ],
-    techStack: ["Unreal", "C++", "AI"],
-    demoLink: "#",
-    githubLink: "#"
+    techStack: ["Node.js", "Express", "Javascript", "MongoDB"],
+    githubLink: "https://github.com/AlabasterRig/Subscription-Tracker",
+    category: "web"
   },
+  {
+    title: "Heart Disease Prediction",
+    description: "Heart Disease Prediction",
+    images: [
+      "/Pic1.jpg",
+    ],
+    techStack: ["Python", "Machine Learning", "Ensemble"],
+    githubLink: "https://github.com/AlabasterRig/Heart-Disease-Prediction",
+    category: "ml"
+  }
 ];
 
 const Projects = () => {
+  const [filter, setFilter] = useState("all");
+
+  const filteredProjects = useMemo(() => {
+    if (filter === "all") {
+      return projects; // Directly return the original projects array
+    }
+    return projects.filter((project) => project.category === filter);
+  }, [filter]);
+
   return (
     <section 
       id="projects" 
@@ -66,20 +103,50 @@ const Projects = () => {
           Featured Projects
         </motion.h1>
 
+        {/* Filter Buttons */}
+        <div className="relative z-10 flex justify-center gap-4 mb-8">
+          <button
+            onClick={() => setFilter("all")}
+            className={`px-4 py-2 rounded-full ${
+              filter === "all" ? "bg-blue-600 text-white" : "bg-gray-200"
+            }`}
+          >
+            All
+          </button>
+          <button
+            onClick={() => setFilter("web")}
+            className={`px-4 py-2 rounded-full ${
+              filter === "web" ? "bg-blue-600 text-white" : "bg-gray-200"
+            }`}
+          >
+            Web
+          </button>
+          <button
+            onClick={() => setFilter("game")}
+            className={`px-4 py-2 rounded-full ${
+              filter === "game" ? "bg-blue-600 text-white" : "bg-gray-200"
+            }`}
+          >
+            Game
+          </button>
+        </div>
+
         <motion.div
+          key={filter} // Ensure a unique key for each filter to re-render the component
           variants={fadeIn('up', 'spring', 0.3, 1)}
+          initial="hidden"
+          animate="show"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <ProjectCard
-            key={project.title}
-            index={index}
-            title={project.title}
-            description={project.description}
-            images={project.images} // Passing the images array
-            techStack={project.techStack}
-            demoLink={project.demoLink}
-            githubLink={project.githubLink}
+              key={project.title}
+              title={project.title}
+              description={project.description}
+              images={project.images}
+              techStack={project.techStack}
+              githubLink={project.githubLink}
+              index={index}
             />
           ))}
         </motion.div>

@@ -54,7 +54,7 @@ const Footer = () => {
               Email
             </a>
             <a
-              href="https://drive.google.com/file/d/1AR4oDPWyQT5Jl4lCaYBhmsgh5i4aCF-J/view?usp=sharing"
+              href="/Utkrist-Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="my-3 text-sm sm:text-base hover:text-[var(--button-hover)] transition-colors duration-300"

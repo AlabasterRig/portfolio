@@ -1,16 +1,15 @@
 "use client";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
 import { fadeIn } from "@/utils/motion";
-import { CodeBracketIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
+import { CodeBracketIcon } from "@heroicons/react/24/outline";
 
 interface ProjectCardProps {
   title: string;
   description: string;
-  images: string[]; // Array of image sources
+  images: string[];
   techStack: string[];
-  demoLink: string;
   githubLink: string;
   index: number;
 }
@@ -20,7 +19,6 @@ const ProjectCard = ({
   description,
   images,
   techStack,
-  demoLink,
   githubLink,
   index,
 }: ProjectCardProps) => {
@@ -34,25 +32,37 @@ const ProjectCard = ({
   const rotateX = useTransform(y, [-100, 100], [10, -10]);
   const rotateY = useTransform(x, [-100, 100], [-10, 10]);
 
-  const handleKeyDown = useCallback((event: KeyboardEvent) => {
-    if (event.key === "Escape") {
+  useEffect(() => {
+    if (isOpen) {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          setIsOpen(false);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = "unset";
+      };
+    }
+  }, [isOpen]);
+
+  // Added functionality to close the modal when clicking outside the modal content.
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
       setIsOpen(false);
     }
-  }, []);
+  };
 
   useEffect(() => {
     if (isOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
-      modalRef.current?.focus();
-    } else {
-      document.body.style.overflow = "unset";
+      window.addEventListener("mousedown", handleOutsideClick);
+      return () => {
+        window.removeEventListener("mousedown", handleOutsideClick);
+      };
     }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, handleKeyDown]);
+  }, [isOpen]);
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -95,8 +105,6 @@ const ProjectCard = ({
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII="
             />
           </div>
 
@@ -105,12 +113,10 @@ const ProjectCard = ({
               {title}
             </h3>
 
-            {/* Description */}
             <p className="text-[var(--text-primary)] mb-4 overflow-hidden overflow-ellipsis line-clamp-3">
               {description}
             </p>
 
-            {/* Tech stack */}
             <div className="flex flex-wrap gap-2 mt-auto">
               {techStack.map((tech) => (
                 <span
@@ -166,7 +172,6 @@ const ProjectCard = ({
                   />
                 </div>
 
-                {/* Next and Prev Buttons */}
                 <div className="flex justify-between items-center mb-6">
                   <button
                     className="text-white bg-black/50 p-2 rounded-full hover:bg-black/80 transition-colors"
